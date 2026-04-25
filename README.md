@@ -236,12 +236,12 @@ deploy real-time object detection pipelines at scale.
 ### Sample Output (Top 3)
 | Rank | Name | Role | Match | Interest | Final |
 |------|------|------|-------|----------|-------|
-| 🥇 1 | Ananya Gupta | ML Engineer | 92% | High (0.88) | 91% |
-| 🥈 2 | Arun Kumar | CV Engineer | 78% | High (0.82) | 79% |
-| 🥉 3 | Rajan Bose | ML Engineer | 65% | Medium (0.55) | 62% |
+| 🥇 1 | Mohudoom | ML Engineer | 99% | High (0.85) | 95% |
+| 🥈 2 | Vignesh Kumar | Computer Vision Engineer | 88% | High (0.85) | 88% |
+| 🥉 3 | Neya Mithra | NLP Engineer | 63% | High (0.85) | 69% |
 
-### Simulated Candidate Response (Ananya Gupta)
-> *"This sounds like it could be a great fit — I'm currently working on object detection projects and I'd love to learn more. When can we connect?"*
+### Simulated Candidate Response (Mohudoom)
+> *"This sounds like it could be a great fit - I'm currently working on object detection projects and I'd love to learn more. When can we connect?"*
 
 ### Interest Classification
 ```json
@@ -270,21 +270,20 @@ ai-talent-scout/
 
 ## 🔮 Future Improvements
 
-- **Live candidate discovery** — Connect to LinkedIn API or ATS systems
-- **Resume parsing** — Accept PDF/DOCX candidate resumes
-- **Multi-round outreach** — Simulate a full 3-message conversation thread
-- **Explainability dashboard** — Visual breakdown of each scoring component
-- **Human-in-the-loop** — Recruiter can edit/override interest assessments
-- **Persistent database** — Store results across sessions with SQLite
+- **Live candidate discovery** - Connect to LinkedIn API or ATS systems
+- **Resume parsing** - Accept PDF/DOCX candidate resumes
+- **Multi-round outreach** - Simulate a full 3-message conversation thread
+- **Explainability dashboard** - Visual breakdown of each scoring component
+- **Human-in-the-loop** - Recruiter can edit/override interest assessments
+- **Persistent database** - Store results across sessions with SQLite
 
 ---
 
 ## 👤 Author
 
 **Abishek Velan M**  
-Submitted for: Catalyst Hackathon — Deccan AI  
-Deadline: April 27, 2026
-
+Submitted for: Catalyst Hackathon - Deccan AI  
 ---
 
-*Built with ❤️ and too much coffee.*
+*Built with ❤️ and too much coffee.*  
+*Thanks to ChatGPT and Claude.*
