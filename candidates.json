@@ -6,115 +6,115 @@
     "role": "ML Intern"
   },
   {
-    "name": "Priya Nair",
+    "name": "Priya Dharshini",
     "skills": ["Java", "Spring Boot", "Microservices", "REST APIs"],
     "experience": 4,
     "role": "Backend Developer"
   },
   {
-    "name": "Arjun Verma",
+    "name": "Arun Mozhi Varma",
     "skills": ["Python", "SQL", "Data Analysis", "Pandas"],
     "experience": 3,
     "role": "Data Analyst"
   },
   {
-    "name": "Sneha Iyer",
+    "name": "Sneha Vijay",
     "skills": ["JavaScript", "React", "HTML", "CSS"],
     "experience": 2,
     "role": "Frontend Developer"
   },
   {
-    "name": "Karthik Reddy",
+    "name": "Karthikeyan",
     "skills": ["Python", "Django", "PostgreSQL", "REST APIs"],
     "experience": 3,
     "role": "Backend Developer"
   },
   {
-    "name": "Ananya Gupta",
+    "name": "Mohamed Mohudoom",
     "skills": ["Python", "Deep Learning", "PyTorch", "Computer Vision"],
     "experience": 5,
     "role": "ML Engineer"
   },
   {
-    "name": "Vikram Singh",
+    "name": "Kaali Praveen",
     "skills": ["SQL", "Power BI", "Excel", "Data Visualization"],
     "experience": 4,
     "role": "Business Analyst"
   },
   {
-    "name": "Meera Joshi",
+    "name": "Yuvan Sankar",
     "skills": ["Python", "R", "Statistics", "Machine Learning"],
     "experience": 3,
     "role": "Data Scientist"
   },
   {
-    "name": "Rohit Das",
+    "name": "Vikash Kannan",
     "skills": ["Node.js", "Express", "MongoDB", "JavaScript"],
     "experience": 2,
     "role": "Backend Developer"
   },
   {
-    "name": "Aditi Kapoor",
+    "name": "Sangeetha",
     "skills": ["React", "TypeScript", "Next.js", "UI/UX"],
     "experience": 3,
     "role": "Frontend Developer"
   },
   {
-    "name": "Siddharth Rao",
+    "name": "Neya Mithra",
     "skills": ["Python", "PyTorch", "NLP", "Transformers", "LLMs"],
     "experience": 4,
     "role": "NLP Engineer"
   },
   {
-    "name": "Divya Menon",
+    "name": "Divya Laxmi",
     "skills": ["Python", "Scikit-learn", "Statistics", "Data Visualization", "SQL"],
     "experience": 5,
     "role": "Senior Data Scientist"
   },
   {
-    "name": "Nikhil Sharma",
+    "name": "Shruthi",
     "skills": ["Go", "Kubernetes", "Docker", "Microservices", "REST APIs"],
     "experience": 6,
     "role": "Backend Engineer"
   },
   {
-    "name": "Kavya Pillai",
+    "name": "Kavya Prakash",
     "skills": ["React", "Vue.js", "TypeScript", "CSS", "Figma"],
     "experience": 4,
     "role": "Frontend Developer"
   },
   {
-    "name": "Rajan Bose",
+    "name": "Rajan Guna",
     "skills": ["Python", "Machine Learning", "TensorFlow", "MLOps", "AWS"],
     "experience": 5,
     "role": "ML Engineer"
   },
   {
-    "name": "Tanvi Shah",
+    "name": "Pushpa Valli",
     "skills": ["Java", "Spring Boot", "PostgreSQL", "Microservices", "Kafka"],
     "experience": 7,
     "role": "Senior Backend Developer"
   },
   {
-    "name": "Arun Kumar",
+    "name": "Vignesh Kumar",
     "skills": ["Python", "Computer Vision", "OpenCV", "PyTorch", "Deep Learning"],
     "experience": 3,
     "role": "Computer Vision Engineer"
   },
   {
-    "name": "Pooja Reddy",
+    "name": "Pooja",
     "skills": ["SQL", "Python", "Tableau", "Data Analysis", "Excel"],
     "experience": 2,
     "role": "Data Analyst"
   },
   {
-    "name": "Harish Nambiar",
+    "name": "Harish Venkat",
     "skills": ["React", "Next.js", "Node.js", "TypeScript", "GraphQL"],
     "experience": 4,
     "role": "Full Stack Developer"
   },
   {
-    "name": "Ishaan Mehta",
+    "name": "Fathima Ishaani",
     "skills": ["Python", "Django", "Docker", "REST APIs", "PostgreSQL"],
     "experience": 2,
     "role": "Junior Backend Developer"
