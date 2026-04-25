@@ -1,24 +1,24 @@
 [
   {
-    "name": "Abishek Velan",
+    "name": "Abishek",
     "skills": ["Python", "Machine Learning", "NLP", "TensorFlow"],
     "experience": 2,
     "role": "ML Intern"
   },
   {
-    "name": "Priya Dharshini",
+    "name": "Priyanka",
     "skills": ["Java", "Spring Boot", "Microservices", "REST APIs"],
     "experience": 4,
     "role": "Backend Developer"
   },
   {
-    "name": "Arun Mozhi Varma",
+    "name": "Arun Mozhi",
     "skills": ["Python", "SQL", "Data Analysis", "Pandas"],
     "experience": 3,
     "role": "Data Analyst"
   },
   {
-    "name": "Sneha Vijay",
+    "name": "Vijay Kumar",
     "skills": ["JavaScript", "React", "HTML", "CSS"],
     "experience": 2,
     "role": "Frontend Developer"
@@ -30,13 +30,13 @@
     "role": "Backend Developer"
   },
   {
-    "name": "Mohamed Mohudoom",
+    "name": "Mohudoom",
     "skills": ["Python", "Deep Learning", "PyTorch", "Computer Vision"],
     "experience": 5,
     "role": "ML Engineer"
   },
   {
-    "name": "Kaali Praveen",
+    "name": "Praveen",
     "skills": ["SQL", "Power BI", "Excel", "Data Visualization"],
     "experience": 4,
     "role": "Business Analyst"
@@ -78,7 +78,7 @@
     "role": "Backend Engineer"
   },
   {
-    "name": "Kavya Prakash",
+    "name": "Kavyi Priya",
     "skills": ["React", "Vue.js", "TypeScript", "CSS", "Figma"],
     "experience": 4,
     "role": "Frontend Developer"
@@ -114,7 +114,7 @@
     "role": "Full Stack Developer"
   },
   {
-    "name": "Fathima Ishaani",
+    "name": "Fathima Isha",
     "skills": ["Python", "Django", "Docker", "REST APIs", "PostgreSQL"],
     "experience": 2,
     "role": "Junior Backend Developer"
