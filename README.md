@@ -24,8 +24,8 @@
 
 | | |
 |---|---|
-| **Demo Video** | [Watch on YouTube / Loom](#) *(link to be added)* |
-| **Live App** | [Deployed URL](#) *(link to be added)* |
+| **Demo Video** | [Watch on Loom](https://www.loom.com/share/b96f6eb56749417b95acc65c54f77e73) |
+| **Live App** | [Live App](https://ai-talent-scout-9ghzwwwfawdeovmagkfpbs.streamlit.app) |
 
 ---
 
