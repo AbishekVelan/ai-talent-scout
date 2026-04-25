@@ -300,20 +300,22 @@ if analyze:
             with right:
                 st.markdown("**Score Breakdown**")
 
+                def clamp(v): return max(0.0, min(1.0, float(v)))
+
                 st.caption(f"Skill Match — {r['skill_score']:.0%}")
-                st.progress(r["skill_score"])
+                st.progress(clamp(r["skill_score"]))
 
                 st.caption(f"Experience Fit — {r['exp_score']:.0%}")
-                st.progress(r["exp_score"])
+                st.progress(clamp(r["exp_score"]))
 
                 st.caption(f"Role Fit — {r['role_score']:.0%}")
-                st.progress(r["role_score"])
+                st.progress(clamp(r["role_score"]))
 
                 st.caption(f"Match Score (weighted) — {r['match_score']:.0%}")
-                st.progress(r["match_score"])
+                st.progress(clamp(r["match_score"]))
 
                 st.caption(f"Interest Score — {r['interest_score']:.0%}")
-                st.progress(r["interest_score"])
+                st.progress(clamp(r["interest_score"]))
 
                 st.markdown("---")
                 st.metric("**Final Score**", f"{r['final_score']:.0%}")
