@@ -1,289 +1,177 @@
 # 🎯 AI Talent Scout
+### Catalyst Hackathon — Deccan AI
 
-> **Catalyst Hackathon — Deccan AI**  
-> An AI-powered recruitment agent that reads a Job Description, discovers matching candidates, simulates outreach conversations, and produces a dual-scored ranked shortlist — instantly.
-
----
-
-## 📋 Table of Contents
-
-- [Demo](#demo)
-- [Problem Statement](#problem-statement)
-- [Solution Overview](#solution-overview)
-- [Architecture](#architecture)
-- [Scoring Logic](#scoring-logic)
-- [Tech Stack](#tech-stack)
-- [Local Setup](#local-setup)
-- [Sample Inputs & Outputs](#sample-inputs--outputs)
-- [Project Structure](#project-structure)
-- [Future Improvements](#future-improvements)
+An AI agent that reads a Job Description, finds the best matching candidates, simulates how they'd respond to a recruiter, and gives you a ranked shortlist — in under 2 minutes.
 
 ---
 
-## 🎬 Demo
+## 🔗 Links
 
 | | |
 |---|---|
+| **Live App** | [ai-talent-scout-9ghzwwwfawdeovmagkfpbs.streamlit.app](https://ai-talent-scout-9ghzwwwfawdeovmagkfpbs.streamlit.app) |
 | **Demo Video** | [Watch on Loom](https://www.loom.com/share/b96f6eb56749417b95acc65c54f77e73) |
-| **Live App** | [Live App](https://ai-talent-scout-9ghzwwwfawdeovmagkfpbs.streamlit.app) |
+| **GitHub** | [AbishekVelan/ai-talent-scout](https://github.com/AbishekVelan/ai-talent-scout) |
 
 ---
 
-## 🧩 Problem Statement
+## 🧩 What Problem Does It Solve?
 
-Recruiters spend hours manually:
-1. Reading job descriptions and extracting requirements
-2. Sifting through candidate profiles for skill/experience matches
-3. Sending outreach messages and guessing interest levels
-4. Shortlisting candidates without a clear scoring rationale
+Recruiters waste hours doing this manually:
+- Reading JDs and figuring out what skills are needed
+- Going through every candidate profile one by one
+- Sending outreach messages and hoping candidates reply
+- Trying to rank candidates with no clear system
 
-**AI Talent Scout** automates the entire pipeline — from JD parsing to a ranked, explainable shortlist — in under 2 minutes.
+**AI Talent Scout does all of this automatically.**
 
 ---
 
-## 🚀 Solution Overview
+## 🚀 How It Works
 
 ```
-Job Description (text)
-        │
-        ▼
-┌─────────────────────┐
-│   JD Parser (LLM)   │  → Extracts: skills, experience, role title
-└─────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│  Candidate Matching Engine  │  → Skill match + Exp fit + Role fit
-│  (Hybrid: rule + LLM)       │
-└─────────────────────────────┘
-        │
-        ▼
-┌──────────────────────────────┐
-│  Conversational Outreach     │  → LLM simulates realistic reply
-│  Simulation (LLM)            │
-└──────────────────────────────┘
-        │
-        ▼
-┌──────────────────────────────┐
-│  Interest Classifier (LLM)  │  → High / Medium / Low + score
-└──────────────────────────────┘
-        │
-        ▼
-┌──────────────────────────────────────────┐
-│  Ranked Shortlist                        │
-│  Final Score = Match×0.7 + Interest×0.3 │
-└──────────────────────────────────────────┘
+You paste a Job Description
+        ↓
+AI reads it and extracts: skills needed, experience, job title
+        ↓
+Every candidate is scored on 3 things:
+  • Skill Match  — do their skills match the JD?
+  • Experience   — do they have enough years?
+  • Role Fit     — is their current role similar? (AI judges this)
+        ↓
+AI pretends to message each candidate and simulates their reply
+        ↓
+AI reads the reply and decides: High / Medium / Low interest
+        ↓
+Final ranked list = Match Score (70%) + Interest Score (30%)
 ```
 
 ---
 
-## 🏗 Architecture
+## 📐 Scoring Explained Simply
 
-```
-┌──────────────────────────────────────────────────────────┐
-│                    Streamlit Frontend                    │
-│  • JD input    • Score sliders    • Ranked cards + CSV  │
-└──────────────────────────┬───────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────────┐
-│                    app.py  (Orchestrator)                │
-│  parse_jd → match candidates → simulate → classify      │
-└──────────────────────────┬───────────────────────────────┘
-                           │
-              ┌────────────┴────────────┐
-              ▼                         ▼
-┌─────────────────────┐    ┌─────────────────────────────┐
-│   utils.py          │    │   prompts.py                │
-│   Scoring functions │    │   4 prompt templates        │
-│   LLM call wrapper  │    │   JD / Role / Outreach /    │
-│   JSON cleaner      │    │   Interest classifier       │
-└──────────┬──────────┘    └─────────────────────────────┘
-           │
-           ▼
-┌─────────────────────┐
-│   Groq API          │
-│   llama-3.1-8b-inst │
-└─────────────────────┘
-```
-
-### Component Responsibilities
-
-| Component | Role |
-|-----------|------|
-| `app.py` | UI, orchestration, progress tracking, results display |
-| `utils.py` | LLM calls, JSON parsing, scoring maths |
-| `prompts.py` | All 4 LLM prompt templates |
-| `candidates.json` | Candidate pool (20 profiles; swap for real DB/ATS) |
-| Groq API | Fast LLM inference (llama-3.1-8b-instant) |
+| Score | What it measures | How |
+|-------|-----------------|-----|
+| Skill Match | How many JD skills the candidate has | Simple overlap count |
+| Experience Fit | How close their years of experience are | Penalty if under, small bonus if over |
+| Role Fit | How similar their job title is | AI judges and gives 0–1 score |
+| Interest Score | How keen they seem | AI simulates their reply, then classifies it |
+| **Final Score** | Overall rank | Match × 0.7 + Interest × 0.3 |
 
 ---
 
-## 📐 Scoring Logic
+## 🏗️ Architecture
 
-### 1. Skill Match Score
 ```
-skill_score = |JD_skills ∩ Candidate_skills| / |JD_skills|
++--------------------------------------------+
+|            Streamlit Web App               |
+|   JD input | sliders | ranked cards | CSV  |
++--------------------------------------------+
+                      |
+                      v
++--------------------------------------------+
+|                  app.py                    |
+|          Runs the full pipeline            |
++--------------------------------------------+
+          |                      |
+          v                      v
++------------------+    +--------------------+
+|    utils.py      |    |    prompts.py      |
+|  Scoring logic   |    |  4 AI prompt       |
+|  LLM API calls   |    |  templates         |
++------------------+    +--------------------+
+          |
+          v
++------------------+
+|   Groq API       |
+| Llama 3.1 (LLM)  |
++------------------+
 ```
-Case-insensitive Jaccard-style overlap. Rewards exact skill matches.
 
-### 2. Experience Fit Score
-```python
-if actual >= required:
-    exp_score = min(1.0, 1.0 + (actual - required) * 0.05)  # slight bonus for over-qualified
-else:
-    gap = required - actual
-    exp_score = max(0.0, 1.0 - gap * 0.25)  # 25% penalty per missing year
-```
+### What each file does
 
-### 3. Role Fit Score (LLM-generated)
-The LLM compares the job title and candidate's current role, returning a score (0–1) with a one-sentence human-readable explanation.
-
-### 4. Match Score (weighted composite)
-```
-match_score = skill_score × W_skill + exp_score × W_exp + role_score × W_role
-```
-Default weights: 0.5 / 0.3 / 0.2 (adjustable via sidebar sliders).
-
-### 5. Interest Score (LLM-generated)
-The LLM simulates how the candidate would respond to a recruiter cold-message, then a second LLM call classifies that response into High/Medium/Low with a numeric score.
-
-| Level  | Score Range | Meaning |
-|--------|-------------|---------|
-| High   | 0.75–1.0   | Enthusiastic, ready to talk |
-| Medium | 0.40–0.74  | Open but cautious |
-| Low    | 0.00–0.39  | Disinterested or declining |
-
-### 6. Final Score
-```
-final_score = match_score × 0.7 + interest_score × 0.3
-```
+| File | Purpose |
+|------|---------|
+| `app.py` | The web app — UI, buttons, results display |
+| `utils.py` | Scoring math + making AI calls |
+| `prompts.py` | The instructions given to the AI for each task |
+| `candidates.json` | List of 20 candidate profiles |
+| `requirements.txt` | Python packages to install |
 
 ---
 
-## 🛠 Tech Stack
+## 🛠️ Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| UI | Streamlit |
-| LLM | Groq API (llama-3.1-8b-instant) |
-| Language | Python 3.10+ |
-| Data | JSON (candidates.json) |
-| Export | Pandas + CSV download |
+| What | Tool Used |
+|------|-----------|
+| Web UI | Streamlit |
+| AI / LLM | Groq API (Llama 3.1 8B) |
+| Language | Python |
+| Candidate Data | JSON file (20 candidates) |
+| Export | CSV download |
 
 ---
 
-## ⚙️ Local Setup
+## ⚙️ Run It Locally
 
-### Prerequisites
-- Python 3.10+
-- A free [Groq API key](https://console.groq.com)
-
-### 1. Clone the repository
+**Step 1 — Clone the repo**
 ```bash
-git clone https://github.com/<your-username>/ai-talent-scout.git
+git clone https://github.com/AbishekVelan/ai-talent-scout.git
 cd ai-talent-scout
 ```
 
-### 2. Install dependencies
+**Step 2 — Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Set up your API key
-Create a `.env` file in the project root:
+**Step 3 — Add your Groq API key**
+
+Create a file called `.env` in the folder and paste this inside:
 ```
 GROQ_API_KEY=your_groq_api_key_here
 ```
+Get a free key at [console.groq.com](https://console.groq.com)
 
-### 4. Run the app
+**Step 4 — Run the app**
 ```bash
 streamlit run app.py
 ```
-Open [http://localhost:8501](http://localhost:8501) in your browser.
+
+Then open [http://localhost:8501](http://localhost:8501) in your browser.
 
 ---
 
-## 📦 requirements.txt
+## 🧪 Sample Input & Output
 
-```
-streamlit>=1.32.0
-groq>=0.5.0
-python-dotenv>=1.0.0
-pandas>=2.0.0
-```
+**Job Description pasted:**
+> We are hiring an ML Engineer with expertise in Deep Learning, PyTorch, and Computer Vision. Minimum 4 years of experience.
 
----
+**Top 3 Results:**
 
-## 🧪 Sample Inputs & Outputs
+| Rank | Candidate | Match | Interest | Final |
+|------|-----------|-------|----------|-------|
+| 🥇 1 | Mohudoom | 99% | High | 95% |
+| 🥈 2 | Vignesh Kumar | 88% | High | 88% |
+| 🥉 3 | Neya Mithra | 63% | High | 69% |
 
-### Sample JD Input
-```
-We are looking for an ML Engineer with 4+ years of experience in 
-Deep Learning, PyTorch, and Computer Vision. You will build and 
-deploy real-time object detection pipelines at scale.
-```
-
-### Parsed JD
-```json
-{
-  "skills": ["Deep Learning", "PyTorch", "Computer Vision"],
-  "experience": 4,
-  "role": "ML Engineer"
-}
-```
-
-### Sample Output (Top 3)
-| Rank | Name | Role | Match | Interest | Final |
-|------|------|------|-------|----------|-------|
-| 🥇 1 | Mohudoom | ML Engineer | 99% | High (0.85) | 95% |
-| 🥈 2 | Vignesh Kumar | Computer Vision Engineer | 88% | High (0.85) | 88% |
-| 🥉 3 | Neya Mithra | NLP Engineer | 63% | High (0.85) | 69% |
-
-### Simulated Candidate Response (Mohudoom)
-> *"This sounds like it could be a great fit - I'm currently working on object detection projects and I'd love to learn more. When can we connect?"*
-
-### Interest Classification
-```json
-{
-  "interest": "High",
-  "score": 0.88
-}
-```
+**Simulated reply from Mohudoom:**
+> "This sounds like a great fit — I'm currently working on object detection and would love to learn more. When can we connect?"
 
 ---
 
-## 📁 Project Structure
+## 🤖 How This Was Built
 
-```
-ai-talent-scout/
-├── app.py              # Streamlit app & orchestration
-├── utils.py            # LLM calls, scoring functions
-├── prompts.py          # All LLM prompt templates
-├── candidates.json     # Candidate pool (20 profiles)
-├── requirements.txt    # Dependencies
-├── .env.example        # Template for API key
-└── README.md           # This file
-```
-
----
-
-## 🔮 Future Improvements
-
-- **Live candidate discovery** - Connect to LinkedIn API or ATS systems
-- **Resume parsing** - Accept PDF/DOCX candidate resumes
-- **Multi-round outreach** - Simulate a full 3-message conversation thread
-- **Explainability dashboard** - Visual breakdown of each scoring component
-- **Human-in-the-loop** - Recruiter can edit/override interest assessments
-- **Persistent database** - Store results across sessions with SQLite
+This project was built using **vibe coding** — describing what I wanted in plain English and letting AI (Claude + ChatGPT) help write and debug the code. The logic, design decisions, and overall architecture were mine; the AI helped turn ideas into working code faster.
 
 ---
 
 ## 👤 Author
 
-**Abishek Velan M**  
-Submitted for: Catalyst Hackathon - Deccan AI  
+**Abishek Velan M**
+Submitted for: Catalyst Hackathon — Deccan AI
+
 ---
 
-*Built with ❤️ and too much coffee.*  
+*Built with ❤️ and too much coffee.*
 *Thanks to ChatGPT and Claude.*
