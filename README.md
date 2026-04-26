@@ -1,7 +1,7 @@
 # 🎯 AI Talent Scout
 ### Catalyst Hackathon — Deccan AI
 
-An AI agent that reads a Job Description, finds the best matching candidates, simulates how they'd respond to a recruiter, and gives you a ranked shortlist — in under 2 minutes.
+An AI agent that reads a Job Description, finds the best matching candidates, simulates how they'd respond to a recruiter, and gives you a ranked shortlist.
 
 ---
 
